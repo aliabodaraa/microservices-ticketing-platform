@@ -23,6 +23,11 @@ spec:
                 secretKeyRef:
                   name: jwt-secret
                   key: JWT_KEY
+            - name: TEMP_2FA_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: temp-2fa-token-secret
+                  key: TEMP_2FA_TOKEN_SECRET
             - name: EMAIL_FROM
               value: "abodaraaali50@gmail.com"
             - name: EMAIL_PASS
