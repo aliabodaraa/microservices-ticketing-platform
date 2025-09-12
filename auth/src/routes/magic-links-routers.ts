@@ -12,16 +12,6 @@ import {
   InternalServerError,
 } from "@aaticketsaa/common";
 
-if (!process.env.EMAIL_FROM) {
-  throw new Error("EMAIL_FROM must be defined");
-}
-if (!process.env.EMAIL_PASS) {
-  throw new Error("EMAIL_PASS must be defined");
-}
-if (!process.env.FRONTEND_BASE_URL) {
-  throw new Error("FRONTEND_BASE_URL must be defined");
-}
-
 const MINUTES_OF_EMAIL_EXPIRATION = 1; // expired magicLinks minutes
 
 const router = express.Router();
@@ -32,7 +22,7 @@ const router = express.Router();
 
 const sendMagicLinkEmail = async (email: string, token: string) => {
   // EMAIL CONFIGURATION
-  const magicLinkUrl = `${process.env.FRONTEND_BASE_URL}?token=${token}`;
+  const magicLinkUrl = `${process.env.MLINKS_VERIFICATION_REDIRECTION}?token=${token}`;
   const transporter = nodemailer.createTransport({
     service: "gmail",
     host: "smtp.gmail.com",

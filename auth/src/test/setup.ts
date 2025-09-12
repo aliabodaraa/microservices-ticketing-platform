@@ -1,4 +1,55 @@
-import { MongoMemoryServer } from "mongodb-memory-server";
+// import { MongoMemoryServer } from "mongodb-memory-server";
+// import mongoose from "mongoose";
+// import request from "supertest";
+// import { app } from "../app";
+
+// declare global {
+//   var signin: () => Promise<string[]>;
+// }
+
+// let mongo: any;
+// beforeAll(async () => {
+//   process.env.JWT_KEY = "asdfasdf";
+//   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
+//   mongo = new MongoMemoryServer();
+//   const mongoUri = await mongo.getUri();
+
+//   await mongoose.connect(mongoUri, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   });
+// });
+
+// beforeEach(async () => {
+//   const collections = await mongoose.connection.db.collections();
+
+//   for (let collection of collections) {
+//     await collection.deleteMany({});
+//   }
+// });
+
+// afterAll(async () => {
+//   await mongo.stop();
+//   await mongoose.connection.close();
+// });
+
+// (global as any).signin = async () => {
+//   const email = "test@test.com";
+//   const password = "password";
+
+//   const response = await request(app)
+//     .post("/api/users/signup")
+//     .send({
+//       email,
+//       password,
+//     })
+//     .expect(201);
+
+//   const cookie = response.get("Set-Cookie");
+
+//   return cookie;
+// };
 import mongoose from "mongoose";
 import request from "supertest";
 import { app } from "../app";
@@ -7,21 +58,20 @@ declare global {
   var signin: () => Promise<string[]>;
 }
 
-let mongo: any;
+// Use a real MongoDB instance instead of memory server
 beforeAll(async () => {
   process.env.JWT_KEY = "asdfasdf";
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-  mongo = new MongoMemoryServer();
-  const mongoUri = await mongo.getUri();
-
-  await mongoose.connect(mongoUri, {
+  // Connect to a real MongoDB instance (use a test database)
+  await mongoose.connect("mongodb://localhost:27017/test-auth", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  });
+  } as mongoose.ConnectOptions);
 });
 
 beforeEach(async () => {
+  // Clean up all collections between tests
   const collections = await mongoose.connection.db.collections();
 
   for (let collection of collections) {
@@ -30,11 +80,11 @@ beforeEach(async () => {
 });
 
 afterAll(async () => {
-  await mongo.stop();
+  // Close the connection
   await mongoose.connection.close();
 });
 
-(global as any).signin = async () => {
+global.signin = async (): Promise<string[]> => {
   const email = "test@test.com";
   const password = "password";
 
@@ -46,7 +96,6 @@ afterAll(async () => {
     })
     .expect(201);
 
-  const cookie = response.get("Set-Cookie");
-
+  const cookie = response.get("Set-Cookie") || [];
   return cookie;
 };
