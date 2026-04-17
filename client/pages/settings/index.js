@@ -369,7 +369,7 @@ const SettingsPage = ({ currentUser }) => {
                   {/* Security Notice */}
                   <div className="alert alert-info mt-3">
                     <i className="bi bi-shield-exclamation me-2"></i>
-                    <strong>Security Note:</strong>{" "}
+                    <strong>Security Note:</strong>
                     {require2FAAfterMagicLink
                       ? "With 2FA enabled after magic links, your account has maximum security protection."
                       : "Consider enabling 2FA after magic links for enhanced security."}

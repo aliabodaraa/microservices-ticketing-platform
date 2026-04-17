@@ -43,7 +43,8 @@ export const complete2FALogin = async (req: Request, res: Response) => {
     req.session = {
       jwt: userJwt,
     };
-    res.json({
+
+    res.status(200).send({
       success: true,
     });
   }

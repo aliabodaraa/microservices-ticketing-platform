@@ -14,7 +14,12 @@ spec:
     spec:
       containers:
         - name: client
-          image: aliabodaraa/ticketing-client
+          image: aliabodaraa/ticketing-client2
+          env:
+            - name: NEXT_IN_CLUSTER
+              value: "YES"
+            - name: NEXT_PUBLIC_API_URL
+              value: "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local"
 ---
 apiVersion: v1
 kind: Service

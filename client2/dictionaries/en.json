@@ -1,0 +1,22 @@
+{
+  "header": {
+    "title": "TicketBounty",
+    "signUp": "Sign Up",
+    "signIn": "Sign In"
+  },
+  "navigation": {
+    "about": "nav1",
+    "allTicket": "All Tickets",
+    "tickets": "Tickets",
+    "orders": "Orders",
+    "settings": "Settings"
+  },
+  "page": {
+    "home": {
+      "title": "welocme to our site"
+    },
+    "about": {
+      "title": "About"
+    }
+  }
+}

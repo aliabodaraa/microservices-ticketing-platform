@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: next-client-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: next-client
+  template:
+    metadata:
+      labels:
+        app: next-client
+    spec:
+      containers:
+        - name: next-client
+          image: aliabodaraa/next-client
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: next-client-srv
+spec:
+  selector:
+    app: next-client
+  ports:
+    - name: next-client
+      protocol: TCP
+      port: 4000
+      targetPort: 80

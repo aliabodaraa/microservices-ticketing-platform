@@ -1,0 +1,22 @@
+{
+  "header": {
+    "title": "تكت باوندي",
+    "signUp": "تسجيل",
+    "signIn": "دخول"
+  },
+  "navigation": {
+    "about": "ناف1",
+    "allTicket": "كل الكروت",
+    "tickets": "الكروت",
+    "orders": "الطلبات",
+    "settings": "الإعدادات"
+  },
+  "page": {
+    "home": {
+      "title": "اهلا وسهلا"
+    },
+    "about": {
+      "title": "حول"
+    }
+  }
+}

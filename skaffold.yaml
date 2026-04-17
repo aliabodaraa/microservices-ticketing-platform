@@ -17,13 +17,13 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
-    - image: aliabodaraa/ticketing-client
-      context: client
+    - image: aliabodaraa/ticketing-client2
+      context: client2
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: "**/*.js"
+          - src: "**/*.{ts,tsx}"
             dest: .
     - image: aliabodaraa/tickets
       context: tickets
@@ -51,6 +51,14 @@ build:
             dest: .
     - image: aliabodaraa/payments
       context: payments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
+    - image: aliabodaraa/next-client
+      context: shadcn-admin
       docker:
         dockerfile: Dockerfile
       sync:

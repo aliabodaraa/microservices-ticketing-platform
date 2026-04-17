@@ -38,8 +38,15 @@ spec:
                 name: orders-srv
                 port:
                   number: 3000
-          - path: /(.*)
+          - path: /next-client(.*)
             pathType: ImplementationSpecific
+            backend:
+              service:
+                name: next-client-srv
+                port:
+                  number: 4000
+          - path: /(.*)
+            pathType: Prefix
             backend:
               service:
                 name: client-srv
